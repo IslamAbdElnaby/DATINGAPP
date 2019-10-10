@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="offset-3 col-5">
+    <ng-container *ngIf="!registerMode; else register">
+      <div class="text-center">
+        <h1>Find your match</h1>
+        <p class="lead">Sign up</p>
+        <div class="text-center">
+          <button class="btn btn-primary" (click)="toggleMode()">Register</button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #register>
+      <div class="form-control" style="height: auto; padding: 20px 10px ">
+        <app-register (cancelRegister)="onRegisterCancel($event)"></app-register>
+      </div>
+    </ng-template>
+  </div>
+</div>

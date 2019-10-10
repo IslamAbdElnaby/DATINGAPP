@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h1>Your Profile</h1>
+    </div>
+    <div class="col-sm-8">
+      <div *ngIf="profile.dirty" class="alert alert-info">
+        <p>Warning: <strong>Any unsaved changes will be lost.</strong></p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img src="{{user.picUrl}}" alt="{{user.knownAs}}" class="card-img-top img-thumbnail">
+        <div class="card-body">
+          <div>
+            <strong>Location:</strong>
+            <p>{{user.country}}, {{user.city}}</p>
+          </div>
+          <div>
+            <strong>Age:</strong>
+            <p>{{user.age}}</p>
+          </div>
+          <div>
+            <strong>Last Active:</strong>
+            <p>{{user.lastActive | date}}</p>
+          </div>
+          <div>
+            <strong>Member since:</strong>
+            <p>{{user.created | date}}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <input [disabled]="!profile.dirty" value="Save changes" type="submit" class="bn btn-success btn-block"
+            form="profileForm" />
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="Edit Profile">
+            <form [formGroup]="profile" id="profileForm" (ngSubmit)="updateProfile()">
+              <div class="mt-2">
+                <h4>Description</h4>
+                <textarea formControlName="desc" rows="6" class="form-control" [defaultValue]="desc"></textarea>
+              </div>
+              <div class="mt-4">
+                <h4>Looking For</h4>
+                <textarea formControlName="lookingFor" rows="6" class="form-control"
+                  [defaultValue]="lookingFor"></textarea>
+              </div>
+              <div class="mt-4">
+                <h4>Interests</h4>
+                <textarea formControlName="interests" rows="6" class="form-control"
+                  [defaultValue]="interests"></textarea>
+              </div>
+              <div class="mt-4">
+                <h4>Location Details:</h4>
+                <div class="form-inline">
+                  <label for="country">Country</label>
+                  <input name="country" formControlName="country" type="text" value="{{country}}" />
+                  <label>City</label>
+                  <input name="city" formControlName="city" type="text" value="{{city}}" />
+                </div>
+              </div>
+            </form>
+          </tab>
+          <tab heading="Edit Photos">
+            <app-photo-editor [photos]="user.photos"></app-photo-editor>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
