@@ -56,11 +56,12 @@ namespace DATINGAPP.API.Controllers
 
         // POST api/user
         [HttpPost("")]
-        public async Task Post([FromBody] UserDto user)
+        public void Post([FromBody] UserDto user)
         {
             var pics = user.Photos;
             var photos = _mapper.Map<IEnumerable<Photo>>(pics);
             var u = _mapper.Map<User>(user);
+
         }
 
         // PUT api/user/5

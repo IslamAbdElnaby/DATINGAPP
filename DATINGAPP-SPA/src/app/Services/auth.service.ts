@@ -13,10 +13,12 @@ export class AuthService {
 	decoded: any;
 	userPicUrl = new BehaviorSubject('../../assets/user.png');
 	curUserPicUrl = this.userPicUrl.asObservable();
-
 	constructor(private http: HttpClient) {}
 
 	changeUserPhoto(picUrl: string) {
+		if (!(this.userPicUrl instanceof BehaviorSubject)) {
+			location.reload();
+		}
 		this.userPicUrl.next(picUrl);
 	}
 
